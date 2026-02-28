@@ -151,3 +151,29 @@ function calculateAndSuggest() {
 
   document.getElementById("calcModal").style.display = "flex";
 }
+let selectedPlan = "";
+
+function openMembershipModal(plan) {
+    selectedPlan = plan;
+    document.getElementById("membershipModal").style.display = "flex";
+}
+
+function closeMembershipModal() {
+    document.getElementById("membershipModal").style.display = "none";
+}
+
+function proceedToPayment() {
+    const name = document.getElementById("memberName").value;
+    const age = document.getElementById("memberAge").value;
+    const weight = document.getElementById("memberWeight").value;
+    const height = document.getElementById("memberHeight").value;
+    const goal = document.getElementById("memberGoal").value;
+
+    if (!name || !age || !weight || !height || !goal) {
+        alert("Please fill all details!");
+        return;
+    }
+
+    window.location.href = 
+      `payment.html?plan=${selectedPlan}&name=${name}&age=${age}&weight=${weight}&height=${height}&goal=${goal}`;
+}

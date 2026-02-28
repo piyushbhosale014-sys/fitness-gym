@@ -261,5 +261,26 @@
     <span class="close-modal" onclick="closeDietModal()">✖</span>
   </div>
 </div>
+<!-- MEMBERSHIP FORM MODAL -->
+<div class="membership-modal" id="membershipModal">
+  <div class="membership-content">
+    <span class="close-modal" onclick="closeMembershipModal()">✖</span>
+    <h2>Enter Your Details</h2>
+
+    <input type="text" id="memberName" placeholder="Full Name">
+    <input type="number" id="memberAge" placeholder="Age">
+    <input type="number" id="memberWeight" placeholder="Weight (kg)">
+    <input type="number" id="memberHeight" placeholder="Height (cm)">
+
+    <select id="memberGoal">
+      <option value="">Select Goal</option>
+      <option value="bulking">Bulking</option>
+      <option value="cutting">Cutting</option>
+      <option value="fitness">General Fitness</option>
+    </select>
+
+    <button onclick="proceedToPayment()">Continue to Payment</button>
+  </div>
+</div>
 </body>
 </html>
