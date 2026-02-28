@@ -1,29 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment - My Gym</title>
-<link rel="stylesheet" href="style.css">
+    <title>Gym Payment</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: #111;
+            color: white;
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .payment-box {
+            background: #1a1a1a;
+            padding: 30px;
+            width: 350px;
+            margin: 100px auto;
+            border-radius: 10px;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: darkred;
+        }
+    </style>
 </head>
 <body>
 
-<section class="payment-hero">
-  <div class="payment-box">
-    <h1>Complete Your Membership</h1>
-    <p>Secure Demo Payment System</p>
+<div class="payment-box">
+    <h2>Complete Your Payment</h2>
+    <p id="selectedPlan"></p>
 
-    <form>
-      <input type="text" placeholder="Full Name" required>
-      <input type="email" placeholder="Email" required>
-      <input type="text" placeholder="Card Number" required>
-      <input type="text" placeholder="Expiry Date" required>
-      <input type="text" placeholder="CVV" required>
+    <input type="text" placeholder="Full Name" required>
+    <input type="email" placeholder="Email" required>
 
-      <button type="submit">Pay Now</button>
-    </form>
+    <select>
+        <option>UPI</option>
+        <option>Card</option>
+        <option>Net Banking</option>
+    </select>
+
+    <button onclick="makePayment()">Pay Now</button>
+</div>
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <h2>Membership Plans</h2>
+  <div class="pricing-cards">
+
+    <a href="payment.html?plan=basic" class="price-card">
+      <h3>Basic</h3>
+      <p class="price">₹999 / month</p>
+      <ul>
+        <li>Gym Access</li>
+        <li>Cardio Zone</li>
+        <li>Locker</li>
+      </ul>
+    </a>
+
+    <a href="payment.html?plan=standard" class="price-card featured">
+      <h3>Standard</h3>
+      <p class="price">₹2,499 / 3 months</p>
+      <ul>
+        <li>All Basic</li>
+        <li>Weight Training</li>
+        <li>Trainer Support</li>
+      </ul>
+    </a>
+
+    <a href="payment.html?plan=premium" class="price-card">
+      <h3>Premium</h3>
+      <p class="price">₹8,999 / year</p>
+      <ul>
+        <li>All Features</li>
+        <li>Personal Trainer</li>
+        <li>Diet Plan</li>
+      </ul>
+    </a>
+
   </div>
 </section>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const plan = urlParams.get('plan');
+
+    document.getElementById("selectedPlan").innerText =
+        "Selected Plan: " + (plan ? plan.toUpperCase() : "");
+
+    function makePayment() {
+
+        document.body.innerHTML = `
+        <section style="
+            height:100vh;
+            background:linear-gradient(to bottom, #000, #111);
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            color:white;
+            text-align:center;
+        ">
+
+            <h1 style="font-size:40px; margin-bottom:20px;">
+                Scan & Pay
+            </h1>
+
+            <p style="margin-bottom:30px; color:#ccc;">
+                Complete your membership payment via UPI
+            </p>
+
+            <div style="
+                background:#111;
+                padding:30px;
+                border-radius:20px;
+                box-shadow:0 0 40px red;
+            ">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=yourupiid@upi&pn=MyGym&am=2499"
+                     alt="QR Code">
+            </div>
+
+            <button onclick="paymentSuccess()" 
+                style="
+                margin-top:40px;
+                padding:12px 30px;
+                background:red;
+                border:none;
+                color:white;
+                border-radius:30px;
+                cursor:pointer;
+                font-size:16px;
+                ">
+                I've Paid
+            </button>
+
+        </section>
+        `;
+    }
+
+    function paymentSuccess(){
+        alert("Payment Verified ✅ Welcome to My Gym!");
+        window.location.href="index.html";
+    }
+</script>
 
 </body>
 </html>

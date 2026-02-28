@@ -937,3 +937,9 @@ html {
 .price-card:hover {
   transform: scale(1.05);
 }
+.price-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
